@@ -1,0 +1,25 @@
+<p>
+	{{ form_start(descriptionForm, {'action': path('profil_utilisateur'), 'method': 'POST',
+									'attr': {
+										'class': 'js-description-form-object',
+                                        'novalidate': 'novalidate'
+                                    } }) }}
+	<div class="field">
+		<div class="control">
+			{{ form_widget(descriptionForm.description, {
+                'attr': {
+                    'value': '{{ app.user.description }}'
+                } }) }}
+			{{ form_errors(descriptionForm.description) }}
+		</div>
+		<div class="has-text-right">
+			<span id="js-caracteres-restants"></span>
+		</div>
+	</div>
+
+	<div class="has-text-centered">
+		<button id="js-description-form-submit" class="btn">Editer</button>
+	</div>
+
+	{{ form_end(descriptionForm) }}
+</p>

@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	<title>Inscription</title>
+{% endblock %}
+
+{% block content %}
+
+	{# <!-- title-banner --> #}
+
+	<section class="hero is-medium">
+
+		<div class="hero-body">
+			<div class="container">
+				<div class="columns is-multiline is-centered is-vcentered">
+					<div class="column is-narrow">
+						<h1 class="title heading-site">Inscription</h1>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	{# <!-- title-banner --> #}
+
+	<div class="body-section">
+		<div class="container">
+
+			<div id="inscription-form" class="has-text-centered">
+
+				{{ form_start(registrationForm) }}
+				<div class="field">
+					<div class="control has-icons-left has-icons-right">
+						{{ form_widget(registrationForm.pseudo, { 'attr': {'placeholder': 'Pseudo', 'class': 'input'}})}}
+						<span class="icon is-small is-left">
+							<i class="fas fa-id-card-alt"></i>
+						</span>
+						<span class="icon is-small is-right">
+							<i class="fas fa-check"></i>
+						</span>
+						{% if registrationForm.pseudo.vars.errors %}
+							<div class="field-error" style="color: darkred;">
+								<ul>
+									{% for error in registrationForm.pseudo.vars.errors %}
+										<li>
+											<span>
+												<i class="fas fa-exclamation-triangle"></i>
+											</span>
+											{{ error.message }}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="control has-icons-left has-icons-right">
+						{{ form_widget(registrationForm.email, { 'attr': {'placeholder': 'Email', 'class': 'input'}}) }}
+						<span class="icon is-small is-left">
+							<i class="fas fa-envelope"></i>
+						</span>
+						<span class="icon is-small is-right">
+							<i class="fas fa-check"></i>
+						</span>
+						{% if registrationForm.email.vars.errors %}
+							<div class="field-error" style="color: darkred;">
+								<ul>
+									{% for error in registrationForm.email.vars.errors %}
+										<li>
+											<span>
+												<i class="fas fa-exclamation-triangle"></i>
+											</span>
+											{{ error.message }}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="control has-icons-left has-icons-right">
+						{{ form_widget(registrationForm.motDePasse.first, { 'attr': {'placeholder': 'Mot de passe', 'class': 'input'}}) }}
+						<span class="icon is-small is-left">
+							<i class="fas fa-lock"></i>
+						</span>
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="control has-icons-left">
+						{{ form_widget(registrationForm.motDePasse.second, { 'attr': {'placeholder': 'Confirmation du mot de passe', 'class': 'input'}}) }}
+						<span class="icon is-small is-left">
+							<i class="fas fa-lock"></i>
+						</span>
+						{% if registrationForm.motDePasse.first.vars.errors %}
+							<div class="field-error" style="color: darkred;">
+								<ul>
+									{% for error in registrationForm.motDePasse.first.vars.errors %}
+										<li>
+											<span>
+												<i class="fas fa-exclamation-triangle"></i>
+											</span>
+											{{ error.message }}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+
+						{% if registrationForm.motDePasse.second.vars.errors %}
+							<div class="field-error" style="color: darkred;">
+								<ul>
+									{% for error in registrationForm.motDePasse.second.vars.errors %}
+										<li>
+											<span>
+												<i class="fas fa-exclamation-triangle"></i>
+											</span>
+											{{ error.message }}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="control has-text-centered">
+						{{ form_widget(registrationForm.agreeTerms) }}
+						<label class="checkbox">
+							En cochant cette case, vous acceptez nos
+							<a href="">termes et conditions d'utilisation</a>.
+						</label>
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="control has-text-centered">
+						<button class="button is-link">Créer mon compte</button>
+					</div>
+				</div>
+
+				{{ form_end(registrationForm) }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

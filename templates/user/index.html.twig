@@ -1,0 +1,153 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	<title>Mon profil</title>
+{% endblock %}
+
+
+{% block content %}
+
+	<div
+		class="apropos">
+
+
+		{# mon intro #}
+		<div id="mon-intro">
+
+			<h2 class="subtitle heading-site">Mon profil</h2>
+
+			<div class="card">
+				<div class="card-content">
+
+					{% if user.description != "" %}
+						<p class="has-text-left">
+							<i class="fas fa-quote-left fa-2x"></i>
+						</p>
+						<div class="has-text-justified" id="intoQuotes">
+							<p>{{ user.description }}</p>
+						</div>
+						<p class="has-text-right">
+							<i class="fas fa-quote-right fa-2x"></i>
+						</p>
+
+						<p class="subtitle has-text-centered is-italic">
+							{{ user.pseudo}}
+						</p>
+
+					{% else %}
+						<div class="has-text-centered">L'utilisateur n'a pas encore rédigé sa description...</div>
+
+					{% endif %}
+
+				</div>
+			</div>
+
+		</div>
+
+
+		{# ma playlist favorie #}
+
+		<div class="video-area">
+			<div class="video-banner">
+
+				<div class="columns is-centered is-vcentered is-variable is-8">
+
+					<div class="column is-half-desktop is-two-fifths has-text-white">
+						{% if user.playlistLink != "" %}
+							<figure class="image is-16by9">
+								<iframe class="has-ratio has-shadow" width="640" height="360" src="{{ user.playlistLink }}" frameborder="0" allowfullscreen></iframe>
+							</figure>
+						{% else %}
+							<div class="has-text-centered">Cet utilisateur n'a ajouté aucune playlist pour le moment...</div>
+						{% endif %}
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+
+		{# mes artistes favoris #}
+
+		<div class="albums-area">
+
+			<div class="artistes-banner">
+				<div class="albums-header">
+					<h1>Mes Artistes favoris</h1>
+					<span>
+						<i class="fas fa-heart"></i>
+					</span>
+				</div>
+
+				<div class="albums-container">
+
+					{% if artistesFavoris|length == 0 %}
+						Cet utilisateur n'a encore aimé aucun artiste...
+
+					{% else %}
+
+						{% for artiste in artistesFavoris %}
+							<div class="artistes-element">
+								<a href="{{ path('artiste_show', {nom: artiste.nom}) }}">
+									<figure class="image is-128x128"><img class="is-rounded" src="{{ asset('build/' ~ artiste.nom) }}" alt="{{ artiste.nom }}"></figure>
+								</a>
+
+								<a href="{{ path('artiste_show', {nom: artiste.nom}) }}">
+									<h3 class="">{{ artiste.nom }}</h3>
+								</a>
+
+							</div>
+						{% endfor %}
+
+					{% endif %}
+
+				</div>
+			</div>
+
+		</div>
+
+
+		{# mes albums favoris #}
+
+		<div class="albums-area">
+
+			<div class="albums-banner">
+				<div class="albums-header">
+					<h1>Mes Albums favoris</h1>
+					<span>
+						<i class="fas fa-heart"></i>
+					</span>
+				</div>
+
+				<div class="albums-container">
+
+					{% if albumsFavoris|length == 0 %}
+						<div class="empty-album-area">Cet utilisateur n'a encore aimé aucun album.</div>
+
+					{% else %}
+
+						{% for album in albumsFavoris %}
+							<div class="albums-element">
+								<img src="{{ asset('build/' ~ album.artiste.nom ~ '-' ~ album.titre|trim('!')) }}" alt="Pochette de l'album {{ album.titre }} de {{ album.artiste.nom }}">
+
+								<div class="albums-element-content">
+									<h3 class="">{{ album.dateSortie }}
+										-
+										{{ album.titre }}</h3>
+								</div>
+							</div>
+						{% endfor %}
+
+					{% endif %}
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+{% endblock %}

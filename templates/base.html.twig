@@ -1,12 +1,159 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+
+	<!-- head -->
+
+	<head>
+		<meta charset="utf-8"> {% block title %}{% endblock %}
+
+		<!-- CSS -->
+		{# 'app' must match the first argument to addEntry() in webpack.config.js #}
+		{{ encore_entry_link_tags('app') }}
+
+		<!-- Renders a link tag (if your module requires any CSS) -->
+		{% block stylesheet %}{% endblock %}
+		<!-- CSS -->
+
+		<!-- font -->
+		<link href="https://fonts.googleapis.com/css?family=Carter+One|Mada:500&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/8f681046b0.js" crossorigin="anonymous"></script>
+
+		<!-- font -->
+
+		<!-- meta -->
+		{% block meta %}
+			<meta name="title" content="City Pop Japan, L'univers du Japon des années 80">
+			<meta name="description" content="La description de votre site ! PRIMORDIAL : mettre de bons mots clés !">
+			<meta name="keyword" content="musique, citypop, city-pop, disco, japon, idols, funk, future funk, idoles, 80, années 80, 80's, 80s">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% endblock %}
+		<!-- meta -->
+
+	</head>
+	<!-- head -->
+
+
+	<!-- body -->
+
+	<body>
+
+		<!-- on top of everything -->
+
+		<div class="alert">
+			<div class="columns">
+
+				{% for message in app.flashes('success') %}
+
+					<div class="column">
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					</div>
+
+				{% endfor %}
+
+				{% for message in app.flashes('notice') %}
+
+					<div class="column">
+						<div class="alert alert-notice">
+							{{ message }}
+						</div>
+					</div>
+
+				{% endfor %}
+
+				{% for message in app.flashes('failure') %}
+
+					<div class="column">
+						<div class="alert alert-failure">
+							{{ message }}
+						</div>
+					</div>
+
+				{% endfor %}
+
+			</div>
+		</div>
+
+
+		<!-- navigation bar -->
+
+		<nav class="navbar is-fixed-top is-transparent" role="navigation" aria-label="Main navigation">
+
+			<div class="navbar-brand">
+
+				<a class="navbar-item header-logo" href="{{ path('accueil') }}">City Pop & Japan 80's</a>
+
+				<a class="navbar-burger burger" role="button" data-target="navMenu" aria-label="menu" aria-expanded="false">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+
+			</div>
+
+			<div id="navMenu" class="navbar-menu">
+				<div class="navbar-end">
+					<a class="navbar-item" href="{{ path('accueil') }}">Accueil</a>
+					<a class="navbar-item" href="{{ path('japan80Histoire') }}">Japan in the 80's</a>
+					<a class="navbar-item" href="{{ path('index_artistes') }}">Artistes</a>
+					<a class="navbar-item" href="#">Playlists</a>
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<a href="{{ path('profil_utilisateur') }}" class="navbar-item">Mon profil</a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('easyadmin') }}" class="navbar-item">Backend</a>
+						{% endif %}
+						<a href="{{ path('app_logout') }}" class="navbar-item">
+							<i class="fas fa-sign-out-alt"></i>
+						</a>
+					{% else %}
+						<a class="navbar-item" href="{{ path('app_login') }}">Connexion</a>
+					{% endif %}
+				</div>
+			</div>
+
+		</nav>
+
+		<!-- navigation bar -->
+
+
+		<div class="contenu"> {% block content %}{% endblock %}
+			</div>
+
+
+			<!-- about - contact -->
+
+			<footer class="about">
+				<i class="fas fa-heart"></i>
+
+				<h3 class="">
+					<b>A propos</b>
+				</h3>
+
+				<div class="block">
+					<p>
+						<a href="{{ path('qui_suis_je') }}">Qui suis-je ?</a>
+					</p>
+					<p>
+						<a href="#">Aidez-moi à améliorer le site !</a>
+					</p>
+					<p>
+						<a href="#">Me contacter</a>
+					</p>
+				</div>
+			</footer>
+
+			<!-- about - contact -->
+
+
+			<!-- Renders app.js & a webpack runtime.js file -->
+			{{ encore_entry_script_tags('app') }}
+
+			{% block javascript %}{% endblock %}
+
+
+		</body>
+		<!-- body -->
+
+
+	</html>

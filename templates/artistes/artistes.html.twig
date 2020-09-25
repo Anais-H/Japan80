@@ -1,0 +1,113 @@
+{% extends "base.html.twig" %}
+
+{% block title %}<title>Artistes</title>{% endblock %}
+
+{% block content %}
+
+{# banner #}
+
+<section class="hero is-medium">
+
+    <div class="hero-body">
+      <div class="container">
+
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-narrow">
+            <h1 class="title heading-site">Artistes</h1>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+</section>
+
+
+{# liste des artistes disponibles #}
+
+<div class="resultats-recherche-area">
+
+    
+    <div class="columns is-centered">
+
+        {# en-tete filtre et barre de recherche #}
+
+        <div class="column is-half has-text-left">
+            <p>Filtre <i class="fas fa-caret-down"></i></p>
+        </div>
+        <div class="column is-half has-text-right">
+            <p>Recherche <i class="fas fa-search"></i></p>
+        </div>
+
+    </div>
+    
+    <p><i>{{artistes|length}} {% if artistes|length > 1 %} résultats {% else %} résultat {% endif %}</i></p>
+
+    {# resultats de la recherche #}
+
+    <div class="columns is-variable is-4 is-multiline resultats-recherche">
+
+      {% for artiste in artistes %}
+        <div class="column is-half-mobile is-one-third-desktop">
+
+            <div class="columns is-vcentered">
+              <div class="column is-narrow">
+                <a href="{{ path('artiste_show', {nom: artiste.nom}) }}"><figure class="image is-96x96 is-centered-element photo-artiste"><img class="is-rounded" src="{{ asset('build/' ~ artiste.nom) }}" alt="{{ artiste.nom }}"></figure></a>
+              </div>
+              <div class="column is-narrow">
+                <a href="{{ path('artiste_show', {nom: artiste.nom})}}"><h1 class="artist-name hoverable-text">{{ artiste.nom }}</h1></a>
+                <h1>{{artiste.nomJp }}</h1>
+              </div>
+            </div>
+
+        </div>
+      {% endfor %}
+
+      
+    </div>
+        
+
+  </div>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script>
+
+  $(document).ready(function() {
+
+    $('#search-user').keyup(function() {
+
+      $('#result-search').html('');
+
+      var utilisateur = $(this).val();
+
+      if(utilisateur != ""){
+
+        $.ajax({
+          type: 'GET',
+          url: 'fonctions/recherche_utilisateur.php',
+          data: 'user=' + encodeURIComponent(utilisateur),
+          success: function(data){
+
+            if(data != ""){
+              $('#result-search').append(data);
+
+            } else {
+              document.getElementById('result-search').innerHTML = "<div style='font-size: 20px; text-align: center; margin-top: 10px'>Aucun utilisateur</div>"
+            }
+
+          }
+        });
+        
+      }
+
+    });
+
+  });
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,637 @@
+@charset "utf-8";
+// Customization
+// You can easily customize Bulma with your own variables.
+// Just uncomment the following block to see the result.
+// 1. Import the initial variables
+@import "../../node_modules/bulma/sass/utilities/initial-variables";
+// 2. Set your own initial variables
+// Update the contrast color, used for links
+$link: #ef8906;
+$pale-link: #f5ab35;
+$dark-link: #86520f;
+// Add main and its invert
+$main2: #b2d0d2;
+$main3: #2f4f4f;
+$transparent-black: rgba(0, 0, 0, .35);
+// Update the sans-serif font family
+$family-sans-serif: "Helvetica",
+"Arial",
+sans-serif;
+// 3. Set the derived variables
+$black: #2a2a2a;
+$white: #fff;
+$primary1: #005555;
+$favoris-bg: #feca57;
+// 4. Import the rest of Bulma
+@import "../../node_modules/bulma/bulma";
+
+/* *******
+
+    Titre : font-family: 'Carter One', cursive;
+
+    Texte : font-family: 'Mada', sans-serif;
+
+*******  */
+
+
+/*
+global
+*/
+
+html {
+    font-size: 100%;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    color: $black;
+}
+
+.contenu {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+.heading-site {
+    color: #FFFFFF;
+    text-align: center;
+    font-family: 'Carter One', cursive;
+    font-size: 3.5em;
+    font-weight: 600;
+}
+
+.site-typo {
+    font-family: 'Carter One', cursive;
+    font-weight: 600;
+}
+
+.body-section {
+    padding: 3rem 0;
+}
+
+.body-section-title {
+    color: $primary1;
+    font-family: 'Carter One', cursive;
+    font-size: 2em;
+    font-weight: 600;
+    padding-bottom: 1rem;
+}
+
+.text-cell {
+    vertical-align: middle;
+    padding-left: 3%;
+}
+
+.image-rounded-corners {
+    border-radius: 6px;
+}
+
+*:focus {
+    outline: none;
+}
+
+.has-shadow {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
+}
+
+.is-centered-element {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.is-medium-size {
+    font-size: 1rem;
+}
+
+.is-link {
+    color: $link;
+}
+
+.is-link:hover {
+    color: $black;
+}
+
+.modal {
+    color: $black;
+}
+
+.modal-info {
+    padding: 2rem 1rem 1rem 1rem;
+}
+
+div.full-height {
+    width: 100vw;
+    height: 100vh;
+}
+
+.has-background-2 {
+    background-color: $main2;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+
+/*
+    Artistes
+*/
+
+.hero {
+    background-image: url("../images/artiste-baniere.png");
+    background-size: cover;
+}
+
+.banner-credit {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.artiste-description {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+.photo-artiste {
+    transition: all .3s ease-in-out; 
+}
+.photo-artiste:hover {
+    transform: scale(1.3); 
+}
+
+.artist-name {
+    color: $primary1;
+    text-align: center;
+    font-family: 'Carter One', cursive;
+}
+
+
+/*
+  navigation bar
+  */
+
+.navbar {
+    width: 100%;
+    background-color: rgba(0, 0, 0, .35);
+}
+
+.header-logo {
+    color: $white;
+    font-family: 'Carter One', cursive;
+    float: left;
+    margin-left: 1.85rem;
+    font-size: 1.85rem;
+}
+
+.header-logo a:hover {
+    color: #ffffff;
+}
+
+.navbar-link.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+a.navbar-item.is-active,
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover {
+    color: $white;
+}
+
+.navbar-menu {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar-menu a {
+    font-family: 'Mada', sans-serif;
+    font-size: 1.25rem;
+    color: $white;
+}
+
+.navbar-menu a:hover,
+.burger a:hover {
+    background-color: rgba(0, 0, 0, .5);
+    color: $link;
+}
+
+.burger span {
+    color: $white;
+    height: 0.125rem;
+}
+
+.burger a:hover {
+    background-color: rgba(0, 0, 0, .5);
+    color: $link;
+}
+
+.navbar-burger {
+    margin-right: 1.85rem;
+}
+
+
+/*
+  actualite
+  */
+
+.actu {
+    background-image: url("../images/artiste-baniere.png");
+    background-size: cover;
+    padding-top: 7.5rem;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 3.125rem;
+    text-align: center;
+    font-family: 'Mada', sans-serif;
+}
+
+.actu a:hover {
+    color: $dark-link;
+}
+
+.actu p {
+    font-size: 1.125rem;
+}
+
+#actu-favori {
+    background-color: $favoris-bg;
+}
+
+.actu-image-jaquette {
+    max-width: 15rem;
+}
+
+.actu-vignette {
+    max-width: 3.75rem;
+}
+
+.actu .container .figure {
+    text-align: center;
+    max-height: 15rem;
+    width: auto;
+    margin-bottom: 1.85rem;
+}
+
+.actu-image-credit {
+    margin-top: 1.125rem;
+    text-align: center;
+}
+
+.soundcloud-caption {
+    text-align: left;
+    font-style: italic;
+}
+
+.titre-soundcloud {
+    position: relative;
+    height: 10rem;
+}
+
+.titre-soundcloud iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*
+  about
+  */
+
+.about {
+    text-align: center;
+    color: $white;
+    padding-top: 1.125rem;
+    padding-bottom: 1.875rem;
+    background-color: $main3;
+}
+
+.about h3 {
+    margin-bottom: 1rem;
+}
+
+.about a {
+    color: $pale-link;
+}
+
+.about a:hover {
+    color: $white;
+}
+
+
+/*
+  media queries
+  */
+
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+
+@media screen and (max-width: 650px) {
+    .header-logo {
+        font-size: 1.5rem;
+    }
+}
+
+
+/*
+video
+*/
+
+.video-area {
+    width: 100%;
+    text-align: center;
+}
+
+.video-banner {
+    padding: 5rem 0;
+    background-color: $main2;
+}
+
+.video-caption {
+    font-style: italic;
+}
+
+
+/*
+  albums listing
+  */
+
+.albums-area {
+    width: 100%;
+}
+
+.albums-banner {
+    padding-bottom: 1rem;
+    background-color: $main2;
+    padding: 2rem 0;
+}
+
+.albums-header {
+    font-size: 1.7rem;
+    padding: 0 1rem 1rem;
+    text-align: left;
+}
+
+.albums-header h1 {
+    margin-right: 2rem;
+    display: inline;
+}
+
+.albums-header h1+span {
+    margin-right: 3rem;
+}
+
+.albums-category {
+    font-size: 1.5rem;
+    padding-left: 3rem;
+    font-weight: 500;
+    padding-bottom: 1rem;
+}
+
+.albums-container+.albums-category {
+    margin-top: 1rem;
+}
+
+.albums-container {
+    padding-right: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.albums-element {
+    display: inline-block;
+    margin: 0 1.5rem;
+    text-align: center;
+}
+
+.albums-element img {
+    width: 15rem;
+    height: 15rem;
+    min-width: 15rem;
+    min-height: 15rem;
+}
+
+.albums-element-content h3 {
+    color: $primary1;
+    text-align: center;
+    font-family: 'Carter One', cursive;
+}
+
+.empty-album-area {
+    padding: 2rem 0 4rem 6rem;
+}
+
+
+/*
+affichage des resultats de recherche
+*/
+
+.resultats-recherche-area {
+    padding-top: 1.5rem;
+    padding: 2rem 15%;
+    background-color: $main2;
+}
+
+.resultats-recherche .column {
+    padding-top: 2rem;
+    border-radius: 10rem;
+}
+
+
+/*
+A propos
+*/
+
+.apropos {
+    font-family: 'Mada', sans-serif;
+}
+
+.apropos #mon-intro {
+    background-image: url("../images/artiste-baniere.png");
+    background-size: cover;
+    padding-top: 7%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+}
+
+.apropos h2 {
+    font-size: 2.5rem;
+    color: #FFFFFF;
+}
+
+#intoQuotes {
+    padding: 0 2rem;
+}
+
+
+/*
+  artistes listing
+  */
+
+.artistes-banner {
+    padding-bottom: 1rem;
+    background-color: $white;
+    padding: 2rem 0;
+}
+
+.artistes-element {
+    display: inline-block;
+    margin: 0 1.5rem;
+}
+
+.artistes-element h3 {
+    text-align: center;
+    font-family: 'Carter One', cursive;
+}
+
+
+/*
+    Profil utilisateur mode edition
+*/
+
+.profil-description-form-field {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 6.5rem;
+}
+
+input.profil-playlist-form-field {
+    width: 70%;
+    border: none;
+    border-bottom: solid thin gray;
+    background-color: transparent;
+}
+
+button.is-icon {
+    background: transparent;
+    border: none;
+    color: $link;
+    cursor: pointer;
+}
+
+button.is-icon:hover {
+    color: $black;
+}
+
+figure#edit-profil-picture {
+    opacity: 0;
+    position: absolute;
+    transition: .6s ease;
+    background-color: rgba(0, 0, 0, 0.281);
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+figure#edit-profil-picture i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+figure#js-profil-picture-form-link:hover figure#edit-profil-picture {
+    opacity: 1;
+}
+
+input#profil_picture_profilPictureFile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    overflow: hidden;
+    width: 3rem;
+    height: 5rem;
+    opacity: 0;
+    cursor: pointer;
+}
+
+input#profil_picture_profilPictureFile + label {
+    display: none;
+}
+
+i#js-profil-picture-form-link {
+    color: $link;
+}
+
+i#js-profil-picture-form-link:hover {
+    color: $black;
+}
+
+
+/*
+ Flash messages
+*/
+
+div.alert {
+    position: fixed;
+    left: 2rem;
+    bottom: 4rem;
+    padding: 1.5rem;
+    border-radius: 20px;
+    z-index: 200;
+    color: $white;
+    -moz-animation: alertAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: alertAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: alertAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: alertAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes alertAnimation {
+    to {
+        width:0;
+        height:0;
+        padding: 0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes alertAnimation {
+    to {
+        width:0;
+        height:0;
+        padding: 0;
+        visibility:hidden;
+    }
+}
+
+div.alert-success {
+    background-color: green;
+}
+
+div.alert-failure {
+    background-color: darkred;
+}
+
+div.alert-notice {
+    background-color: $main3;
+}

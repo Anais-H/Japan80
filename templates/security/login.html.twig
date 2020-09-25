@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	<title>Connexion</title>
+{% endblock %}
+
+{% block content %}
+
+	{# <!-- title-banner --> #}
+
+	<section class="hero is-medium">
+
+		<div class="hero-body">
+			<div class="container">
+				<div class="columns is-multiline is-centered is-vcentered">
+					<div class="column is-narrow">
+						<h1 class="title heading-site">Espace utilisateur</h1>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	{# <!-- title-banner --> #}
+
+
+	<section class="body-section">
+		<div class="container">
+
+			<diw class="columns is-multiline is-centered is-vcentered is-variable is-5">
+				<div class="column is-5 has-text-centered">
+					<form method="post">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+
+						<h1 class="h3 mb-3 font-weight-normal">Veuillez entrer vos identifiants</h1>
+
+						<div style="padding: 1rem 0;">
+							<div class="field">
+								<div class="control has-icons-left">
+									<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input" placeholder="Email" required autofocus>
+									<span class="icon is-small is-left">
+										<i class="fas fa-envelope"></i>
+									</span>
+								</div>
+							</div>
+
+							<div class="field">
+								<div class="control has-icons-left has-icons-right">
+									<input type="password" name="password" id="inputPassword" class="input" placeholder="Mot de passe" required>
+									<span class="icon is-small is-left">
+										<i class="fas fa-lock"></i>
+									</span>
+									<span class="icon is-small is-right clickable">
+										<i class="fas fa-eye toggle-password" style="pointer-events: all;"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+
+
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+						<div class="checkbox mb-3">
+							<input type="checkbox" id="remember_me" name="_remember_me" checked/>
+							<label for="remember_me">Rester connecté</label>
+						</div>
+
+
+						<div>
+							<button class="button is-link" type="submit">
+								Connexion
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="column is-5 has-text-centered">
+					<div>Pas encore de compte ?</div>
+					<div>
+						<a href="{{ path('app_register') }}">
+							<button class="button is-link">Inscription</button>
+						</a>
+					</div>
+				</div>
+			</diw>
+		</div>
+	</section>
+{% endblock %}
+
+{% block javascript %}
+	{{ encore_entry_script_tags('login') }}
+{% endblock %}

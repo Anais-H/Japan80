@@ -1,0 +1,220 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}
+	<title>{{ artiste.nom }}</title>
+{% endblock %}
+
+
+{% block content %}
+
+
+	{# <!-- title-banner --> #}
+
+	<section class="hero is-medium">
+
+		<div class="hero-body">
+			<div class="container">
+				<div class="columns is-multiline is-centered is-vcentered">
+					<div class="column is-narrow">
+						<figure class="image is-128x128 is-centered-element"><img class="is-rounded" src="{{ asset('build/' ~ artiste.nom) }}" alt="{{ artiste.nom }}"></figure>
+					</div>
+					<div class="column is-narrow">
+						<h1 class="title heading-site">{{ artiste.nom }}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{# <div class="banner-credit">
+						      <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+						      href="https://unsplash.com/@trapnation?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Andre Benz"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Andre Benz</span></a>
+						    </div> #}
+
+	</section>
+
+	{# <!-- title-banner --> #}
+
+
+	{# <!-- presentation-video --> #}
+
+	<div class="video-area">
+
+		<div class="video-banner">
+
+			<div class="columns is-centered is-vcentered is-variable is-8">
+				<div class="column is-one-quarter-desktop is-one-third">
+					<div class="card">
+						<div class="card-image">
+							<figure class="image has-ratio">
+								<img src="{{ asset('build/' ~ artiste.nom ~ '-card') }}" alt="{{ artiste.nom }}">
+							</figure>
+						</div>
+						<div class="card-content">
+							<div class="media">
+								<div class="media-left">
+									<figure class="image is-48x48">
+										<img class="is-rounded" src="{{ asset('build/' ~ artiste.nom) }}" alt="{{ artiste.nom }}">
+									</figure>
+								</div>
+								<div class="media-content">
+									<p class="title is-4">{{ artiste.nom }}</p>
+									<p class="subtitle is-6">{{ artiste.nomJp }}</p>
+								</div>
+							</div>
+
+							<div class="content has-text-left">
+								<p>Naissance :
+									{{ dateDeNaissance }}{{ ", " ~ artiste.lieuNaissance }}</p>
+								<p>Débuts :
+									{{artiste.dateDebut }}</p>
+							</div>
+						</div>
+						<footer class="card-footer">
+							<div class="card-footer-item">
+								<a href="{{ path('artiste_like', {'nom': artiste.nom }) }}" class="js-like">
+									{% if app.user and artiste.isLikedByUser(app.user) %}
+										<i class="fas fa-heart"></i>
+									{% else %}
+										<i class="far fa-heart"></i>
+									{% endif %}
+									<span class="js-likes">{{ artiste.likes|length }}</span>
+									<span class="js-label">J'aime</span>
+								</a>
+							</div>
+						</footer>
+					</div>
+				</div>
+
+				<div class="column is-half-desktop is-two-fifths has-text-white">
+					<figure class="image is-16by9">
+						<iframe class="has-ratio has-shadow" width="640" height="360" src="{{ article.bannerPlaylist }}" frameborder="0" allowfullscreen></iframe>
+					</figure>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	{# <!-- presentation-video --> #}
+
+
+	{# <!-- artist-description --> #}
+
+	<div class="artiste-description">
+
+		<div class="columns is-variable is-8 is-vcentered is-centered">
+
+			<article class="column is-one-fifth-desktop is-two-fifths has-text-justified">
+				<time class="is-italic" datetime="{{ article.dateDerniereModification|date("d/m/Y") }}">
+					Modifié le
+					{{ article.dateDerniereModification|date("d/m/Y") }}</time>
+				<br>
+				<p>{{ article.description }}</p>
+
+			</article>
+
+			<div class="column is-one-fifth-desktop is-two-fifths has-text-centered">
+				<img class="has-shadow" src="{{ asset('build/' ~ artiste.nom ~ '-li') }}">
+			</div>
+
+		</div>
+
+
+	</div>
+
+	{# <!-- artist-description --> #}
+
+
+	{# <!-- albums --> #}
+
+	<div class="albums-area">
+		<div class="albums-banner">
+			<div class="albums-header">
+				<h1>DISCOGRAPHIE</h1>
+				<span>
+					<i class="fas fa-play"></i>
+				</span>
+				<span class="is-medium-size">Seuls les singles, albums de la période 1977 - 1993 sont présentés</span>
+			</div>
+
+			<h1 class='albums-category'>Albums</h1>
+			<div class="albums-container">
+
+				{% for album in albums %}
+					<div class="albums-element">
+						<img src="{{ asset('build/' ~ artiste.nom ~ '-' ~ album.titre|trim('!')) }}" alt="Pochette de l'album {{ album.titre }} de {{ artiste.nom }}">
+
+						<div class="albums-element-content">
+							<h3>{{ album.dateSortie }}
+								-
+								{{ album.titre }}</h3>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+
+			<h1 class='albums-category'>Singles</h1>
+			<div class="albums-container">
+
+				{% for single in singles %}
+					<div class="albums-element">
+						<img src="{{ asset('build/' ~ artiste.nom ~ '-' ~ single.titre|trim('!')) }}" alt="Pochette du single {{ single.titre }} de {{ artiste.nom }}">
+
+						<div class="albums-element-content">
+							<h3>{{ single.dateSortie }}
+								-
+								{{ single.titre }}</h3>
+						</div>
+					</div>
+				{% endfor %}
+
+			</div>
+
+		</div>
+
+	</div>
+	{# <!-- albums --> #}
+
+
+{% endblock %}
+
+{# <!-- body --> #}
+
+{% block javascript %}
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+
+		function onClickBtnLike(event) {
+event.preventDefault();
+
+const url = this.href;
+const spanCount = this.querySelector('span.js-likes');
+const icone = this.querySelector('i.fa-heart');
+
+axios({method: 'post', url: url}).then(function (response) {
+spanCount.textContent = response.data.likes;
+
+if (icone.classList.contains('fas')) {
+icone.classList.replace('fas', 'far');
+} else {
+icone.classList.replace('far', 'fas');
+}
+
+}).catch(function (error) {
+if (error.response.status === 403) { // cas ou on est deconnecte
+window.alert('Vous devez vous connecter pour liker un artiste.')
+} else {
+window.alert('Une erreur s\'est produite, réessayez plus tard.');
+}
+});
+}
+
+document.querySelectorAll('a.js-like').forEach(function (link) {
+link.addEventListener('click', onClickBtnLike);
+})
+	</script>
+{% endblock %}

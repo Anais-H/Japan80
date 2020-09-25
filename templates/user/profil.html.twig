@@ -1,0 +1,249 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	<title>Mon profil</title>
+{% endblock %}
+
+
+{% block content %}
+
+	<div
+		class="apropos">
+
+
+		{# mon intro #}
+		<div id="mon-intro">
+
+			<div class="container" style="margin-bottom: 2rem;">
+				<div class="columns is-multiline is-centered is-vcentered">
+					<div class="column is-narrow">
+
+						<figure id="js-profil-picture-form-link" class="image is-128x128 is-square is-centered-element">
+							{% if app.user.profilPicture != '' %}
+								<img id="js-profile-img" class="is-rounded" src="{{ asset('uploads/users_pp/' ~ app.user.profilPicture) }}" alt="Votre photo de profil">
+							{% else %}
+								<img id="js-profile-img" class="is-rounded" src="{{ asset('build/japan80_default_profile_picture.svg') }}" alt="Vous n'avez pas encore de photo de profil">
+							{% endif %}
+							<figure id="edit-profil-picture" class="image is-128x128 is-rounded is-centered-element">
+								<i id="js-profil-picture-form-link" class="fas fa-pen fa-2x"></i>
+							</figure>
+							{{ form_start(pictureForm, {'attr': {
+								'class': 'js-profile-form-object',
+							}}) }}
+							{{ form_widget(pictureForm.profilPictureFile) }}
+							{{ form_end(pictureForm)}}
+						</figure>
+
+					</div>
+					<div class="column is-narrow">
+						<h1 class="title heading-site">{{ app.user.pseudo }}</h1>
+					</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-content">
+
+					<div id="js-profil-description">
+
+
+						{% if app.user.description != "" %}
+
+							<p class="has-text-left">
+								<i class="fas fa-quote-left fa-2x"></i>
+							</p>
+
+							<div class="has-text-justified" id="intoQuotes">
+								<p>
+									<span id="js-description">{{ app.user.description }}</span>
+									&nbsp;
+									<a class="js-profil-description-form-link" href="">
+										<i class="fas fa-pen-fancy"></i>
+									</a>
+								</p>
+							</div>
+
+							<p class="has-text-right">
+								<i class="fas fa-quote-right fa-2x"></i>
+							</p>
+
+							<p class="subtitle has-text-centered is-italic">
+								{{ app.user.pseudo}}
+							</p>
+
+						{% else %}
+
+							{# mettre dans le a.href la route vers la mise à jour du champ description de la table utlisateur #}
+							<div class="has-text-centered">
+								<a class="js-profil-description-form-link">Commencez à rédiger votre description !
+									<i class="fas fa-pen-fancy"></i>
+								</a>
+							</div>
+
+						{% endif %}
+					</div>
+
+					{# Code du formulaire caché d'édition de la description #}
+
+					<div id="js-description-form" style="display: none;">
+						<p class="has-text-left">
+							<i class="fas fa-quote-left fa-2x"></i>
+						</p>
+
+						<div class="has-text-justified" id="intoQuotes">
+							{% include "user/_description_form.html.twig" %}
+						</div>
+
+						<p class="has-text-right">
+							<i class="fas fa-quote-right fa-2x"></i>
+						</p>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+		{# ma playlist favorie #}
+
+		<div class="video-area">
+			<div class="video-banner">
+
+				<div class="columns is-centered is-vcentered is-variable is-8">
+
+					<div class="column is-half-desktop is-two-fifths has-text-white">
+
+						<div id="js-profil-playlist">
+							{% if app.user.playlistLink != "" %}
+								<div id="js-profil-playlist-filled-case">
+									<figure class="image is-16by9">
+										<iframe id="js-profil-playlist-iframe" class="has-ratio has-shadow" width="640" height="360" src="{{ app.user.playlistLink }}" frameborder="0" allowfullscreen></iframe>
+									</figure>
+									<div class="has-text-centered" style="margin-top: 1rem;">
+										<a class="js-playlist-form-link" href="">
+											<i class="fas fa-pen"></i>
+											<i class="fas fa-music"></i>
+										</a>
+									</div>
+								</div>
+							{% else %}
+								<div id="js-profil-playlist-empty-case" class="has-text-centered">
+									<span>Partagez vos morceaux favoris en ajoutant une playlist Youtube !</span>&nbsp;
+									<a class="js-playlist-form-link" href="">
+										<i class="fas fa-plus"></i>
+										<i class="fas fa-music"></i>
+									</a>
+								</div>
+							{% endif %}
+						</div>
+
+						{# Code du formulaire caché d'édition de la description #}
+
+						<div id="js-playlist-form" style="display: none;">
+
+							<div class="has-text-justified">
+								{% include "user/_playlist_form.html.twig" %}
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+
+		{# mes artistes favoris #}
+
+		<div class="albums-area">
+
+			<div class="artistes-banner">
+				<div class="albums-header">
+					<h1>Mes Artistes favoris</h1>
+					<span>
+						<i class="fas fa-heart"></i>
+					</span>
+				</div>
+
+				<div class="albums-container">
+
+					{% if artistesFavoris|length == 0 %}
+						<div class="empty-album-area">
+							Vous n'avez encore aimé aucun artiste.
+							<a href="{{ path('index_artistes') }}">Parcourir l'index.</a>
+						</div>
+
+
+					{% else %}
+
+						{% for artiste in artistesFavoris %}
+							<div class="artistes-element">
+								<a href="{{ path('artiste_show', {nom: artiste.nom}) }}">
+									<figure class="image is-128x128"><img class="is-rounded" src="{{ asset('build/' ~ artiste.nom) }}" alt="{{ artiste.nom }}"></figure>
+								</a>
+
+								<a href="{{ path('artiste_show', {nom: artiste.nom}) }}">
+									<h3 class="">{{ artiste.nom }}</h3>
+								</a>
+
+							</div>
+						{% endfor %}
+
+					{% endif %}
+
+				</div>
+			</div>
+
+		</div>
+
+
+		{# mes albums favoris #}
+
+		<div class="albums-area">
+
+			<div class="albums-banner">
+				<div class="albums-header">
+					<h1>Mes Albums favoris</h1>
+					<span>
+						<i class="fas fa-heart"></i>
+					</span>
+				</div>
+
+				<div class="albums-container">
+
+					{% if albumsFavoris|length == 0 %}
+						<div class="empty-album-area">Vous n'avez encore aimé aucun album.</div>
+
+					{% else %}
+
+						{% for album in albumsFavoris %}
+							<div class="albums-element">
+								<img src="{{ asset('build/' ~ album.artiste.nom ~ '-' ~ album.titre|trim('!')) }}" alt="Pochette de l'album {{ album.titre }} de {{ album.artiste.nom }}">
+
+								<div class="albums-element-content">
+									<h3 class="">{{ album.dateSortie }}
+										-
+										{{ album.titre }}</h3>
+								</div>
+							</div>
+						{% endfor %}
+
+					{% endif %}
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+{% endblock %}
+
+{% block javascript %}
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	{{ encore_entry_script_tags('profil') }}
+{% endblock %}

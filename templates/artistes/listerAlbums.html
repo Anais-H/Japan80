@@ -1,0 +1,15 @@
+<ul>
+    {% for album in albums %}
+        <li>{{ album.titre }}</li>
+    {% endfor %}
+
+    {% for album in albums %}
+    <div class="container">
+        <a href="{% url 'artistes:detail' album_id=album.id %}">
+          <img class="img-responsive" src="{{ album.couverture_album }}" alt="{{ album.titre }}">
+        </a>
+        <h3><a href="/">{{ album.titre }}</a></h3>
+        <p>{{ album.artiste.name }}</p>
+    </div>
+{% endfor %}
+</ul>

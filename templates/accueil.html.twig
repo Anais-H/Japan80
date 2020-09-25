@@ -1,0 +1,166 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	<title>City Pop & Japan 80's</title>
+{% endblock %}
+
+
+{% block content %}
+
+	{# actuality #}
+
+	<div class="actu">
+
+		<h2 class="subtitle heading-site">Actualité</h2>
+
+		<div class="container">
+
+			<div class="tile is-ancestor is-desktop">
+				<div class="tile is-vertical is-8">
+
+					<div class="tile">
+						<div class="tile is-parent is-vertical">
+
+							<article class="tile is-child box">
+								<h3 class="title is-3">
+									<a href="{{ path('artiste_show', {nom: artiste1.nom}) }}">{{ artiste1.nom }}</a>
+								</h3>
+								<table>
+									<tr>
+										<td>
+											<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste1.nom) }}" alt="{{ artiste1.nom }}"></figure>
+										</td>
+										<td class="text-cell">
+											<p>{{artiste1.courteDescription}}</p>
+										</td>
+									</tr>
+								</table>
+							</article>
+
+							<article class="tile is-child box">
+								<h3 class="title is-3">
+									<a href="{{ path('artiste_show', {nom: artiste2.nom}) }}">{{ artiste2.nom }}</a>
+								</h3>
+								<table>
+									<tr>
+										<td>
+											<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste2.nom) }}" alt="{{ artiste2.nom }}"></figure>
+										</td>
+										<td class="text-cell">
+											<p>{{artiste2.courteDescription}}</p>
+										</td>
+									</tr>
+								</table>
+
+							</article>
+
+						</div>
+
+						<div class="tile is-parent">
+
+							<article class="tile is-child box" id="actu-favori">
+								<h3 class="title is-3">Favoris du moment</h3>
+								<div class="titre-soundcloud">
+									<iframe scrolling="no" frameborder="no" allow="autoplay" src="{{ favori1['lien'] }}"></iframe>
+									<h4 class="soundcloud-caption">{{ favori1['legende'] }}</h4>
+								</div>
+
+								<hr class="actu-separator">
+
+								<div class="titre-soundcloud">
+									<iframe scrolling="no" frameborder="no" allow="autoplay" src="{{ favori2['lien'] }}"></iframe>
+									<h4 class="soundcloud-caption">{{ favori2['legende'] }}</h4>
+								</div>
+							</article>
+
+						</div>
+					</div>
+
+					<div class="tile is-parent">
+
+						<article class="tile is-child box">
+							<h3 class="title is-3">
+								<a href="#">City Hunter</a>
+							</h3>
+							<table>
+								<tr>
+									<td>
+										<figure class="image"><img class="image-rounded-corners" src="{{ asset('build/city-hunter-massue') }}" alt="image de l'anime City Hunter où Kaori donne un coup de massue à Ryo"></figure>
+									</td>
+									<td class="text-cell">
+										<p>Connu en France sous le nom de
+											<b>Nicky Larson</b>, les
+											<b>OST</b>
+											de l'anime
+											<b>City Hunter</b>
+											ont fait vibrer des générations !</p>
+									</td>
+								</tr>
+							</table>
+						</article>
+
+					</div>
+				</div>
+
+				<div class="tile is-parent is-vertical">
+
+					<article class="tile is-child box">
+						<h3 class="title is-3">
+							<a href="{{ path('artiste_show', {nom: artiste3.nom}) }}">{{ artiste3.nom }}</a>
+						</h3>
+						<table>
+							<tr>
+								<td>
+									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste3.nom) }}" alt="{{ artiste3.nom }}"></figure>
+								</td>
+								<td class="text-cell">
+									<p>{{artiste3.courteDescription}}</p>
+								</td>
+							</tr>
+						</table>
+					</article>
+
+					<article class="tile is-child box">
+						<h3 class="title is-3">
+							<a href="{{ path('artiste_show', {nom: artiste4.nom}) }}">{{ artiste4.nom }}</a>
+						</h3>
+						<table>
+							<tr>
+								<td>
+									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste4.nom) }}" alt="{{ artiste4.nom }}"></figure>
+								</td>
+								<td class="text-cell">
+									<p>{{artiste4.courteDescription}}</p>
+								</td>
+							</tr>
+						</table>
+					</article>
+
+					<article class="tile is-child box">
+						<h3 class="title is-3">
+							<a href="{{ path('artiste_show', {nom: artiste5.nom}) }}">{{ artiste5.nom }}</a>
+						</h3>
+						<table>
+							<tr>
+								<td>
+									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste5.nom) }}" alt="{{ artiste5.nom }}"></figure>
+								</td>
+								<td class="text-cell">
+									<p>{{artiste5.courteDescription}}</p>
+								</td>
+							</tr>
+						</table>
+					</article>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	{# !actuality #}
+
+{% endblock %}
+
+{# !body #}

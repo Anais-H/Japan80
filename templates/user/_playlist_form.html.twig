@@ -1,0 +1,70 @@
+<p style="margin-top: 1rem;">
+	{{ form_start(playlistForm, {'action': path('profil_utilisateur'), 'method': 'POST',
+									'attr': {
+										'class': 'js-playlist-form-object',
+                                        'novalidate': 'novalidate'
+                                    } }) }}
+	<div class="field">
+		<div class="control" style="text-align: center;">
+			<button type="button" class="is-icon js-toggle-playlist-info-modal">
+				<i class="far fa-question-circle is-link"></i>
+			</button>
+			&nbsp;&nbsp;&nbsp;
+			{{ form_widget(playlistForm.playlistLink) }}
+			&nbsp;
+			<a href="">
+				<button id="js-playlist-form-submit" class="is-icon">
+					<i class="fas fa-check"></i>
+				</button>
+			</a>
+			&nbsp;
+			<a href="">
+				<button id="js-playlist-form-close" class="is-icon">
+					<i class="fas fa-times"></i>
+				</button>
+			</a>
+			{{ form_errors(playlistForm.playlistLink) }}
+		</div>
+	</div>
+
+	{{ form_end(playlistForm) }}
+</p>
+
+<div id="js-playlist-info-modal" class="modal is-clipped" role="dialog">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title">
+				<i class="fab fa-youtube" style="color: #c4302b;"></i>&nbsp;Partager une playlist ou une vidéo Youtube
+			</p>
+			<button class="delete js-toggle-playlist-info-modal" aria-label="Fermer"></button>
+		</header>
+		<section class="modal-card-body">
+			<div>
+				<p>
+					Créez une playlist Youtube avec tous vos morceaux favoris et partagez-la ! Vous pouvez aussi ne partager qu'une seule vidéo.
+					<br>
+					Pour l'un ou l'autre, cliquez sur le bouton
+					<b>partager</b>
+					et copier la première URL qui s'affiche.
+				</p>
+			</div>
+
+			<figure class="image">
+				<img src="{{ asset('build/playlist-info-modal-schema.png')}}">
+			</figure>
+
+			<div class="modal-info">
+				<i class="fas fa-info"></i>
+				&nbsp;&nbsp;
+				<span>Certains morceaux ont été concédés sous Licence à Youtube, ainsi pour éviter tout lien mort, privilégiez les vidéos possédant les droits. Pour les autres, on croise les doigts...</span>
+			</div>
+		</section>
+		<footer class="modal-card-foot">
+			<div class="has-text-centered" style="width: 100%;">
+				<button class="button js-toggle-playlist-info-modal">OK</button>
+			</div>
+
+		</footer>
+	</div>
+</div>

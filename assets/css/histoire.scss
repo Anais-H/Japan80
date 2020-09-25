@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+@import "../../node_modules/bulma/sass/utilities/initial-variables";
+
+$transparent-black: rgba(0, 0, 0, .35);
+$black: #2a2a2a;
+$link: #ef8906;
+
+/*
+    Japan 80 Histoire
+*/
+
+div#histoireLocaleNav {
+    position: fixed;
+    padding-left: 2rem;
+    top:50%;
+    left: -2rem;
+    min-width: 5rem;
+    min-height: 3rem;
+    width: 5rem;
+    height: 3rem;
+    transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    background-color: $transparent-black;
+    z-index: 100;
+    color: white;
+    border-radius: 6%;
+    text-align: center;
+    transition-duration: 1s;
+}
+
+div#histoireLocaleNav i:hover {
+    color: $link;
+}
+
+div#histoireLocaleNav.is-active {
+    left: -5rem;
+}
+
+div#navMenuRaccourcis {
+    position: fixed;
+    top: 50%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-radius: 6%;
+    background-color: $transparent-black;
+    transform: translate(-110%, -50%);
+    -ms-transform: translate(-110%, -50%);
+    transition-duration: 1s;
+    z-index: 100;
+    color: white;
+}
+
+div#navMenuRaccourcis i:hover {
+    color: $link;
+}
+
+div#navMenuRaccourcis div.entree {
+    padding: 1rem;
+}
+
+div#navMenuRaccourcis.is-active {
+    transform: translate(-1rem, -50%);
+}
+
+div.entree a {
+    color: white;
+}
+
+div.entree a:hover {
+    color: $link;
+}
+
+.entree:hover {
+    color: $link;
+}
