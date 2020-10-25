@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=GroupesRepository::class)
  */
-class Groupes
+class Groupe
 {
     /**
      * @ORM\Id
@@ -126,5 +126,10 @@ class Groupes
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
     }
 }

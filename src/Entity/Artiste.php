@@ -84,15 +84,27 @@ class Artiste
     private $likes;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Groupes::class, mappedBy="artistes")
+     * @ORM\ManyToMany(targetEntity=Groupe::class, mappedBy="artistes")
      */
     private $groupes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Anime::class, mappedBy="artistes")
+     */
+    private $animes;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $nom_alternatif;
+
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->groupes = new ArrayCollection();
+        $this->animes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -301,14 +313,14 @@ class Artiste
     }
 
     /**
-     * @return Collection|Groupes[]
+     * @return Collection|Groupe[]
      */
     public function getGroupes(): Collection
     {
         return $this->groupes;
     }
 
-    public function addGroupe(Groupes $groupe): self
+    public function addGroupe(Groupe $groupe): self
     {
         if (!$this->groupes->contains($groupe)) {
             $this->groupes[] = $groupe;
@@ -318,7 +330,7 @@ class Artiste
         return $this;
     }
 
-    public function removeGroupe(Groupes $groupe): self
+    public function removeGroupe(Groupe $groupe): self
     {
         if ($this->groupes->contains($groupe)) {
             $this->groupes->removeElement($groupe);
@@ -327,4 +339,45 @@ class Artiste
 
         return $this;
     }
+
+    /**
+     * @return Collection|Anime[]
+     */
+    public function getAnimes(): Collection
+    {
+        return $this->animes;
+    }
+
+    public function addAnime(Anime $anime): self
+    {
+        if (!$this->animes->contains($anime)) {
+            $this->animes[] = $anime;
+            $anime->addArtiste($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnime(Anime $anime): self
+    {
+        if ($this->animes->contains($anime)) {
+            $this->animes->removeElement($anime);
+            $anime->removeArtiste($this);
+        }
+
+        return $this;
+    }
+
+    public function getNomAlternatif(): ?string
+    {
+        return $this->nom_alternatif;
+    }
+
+    public function setNomAlternatif(?string $nom_alternatif): self
+    {
+        $this->nom_alternatif = $nom_alternatif;
+
+        return $this;
+    }
+
 }

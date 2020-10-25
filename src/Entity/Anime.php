@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnimeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,16 +30,6 @@ class Anime
     private $nom_jp;
 
     /**
-     * @ORM\Column(type="smallint")
-     */
-    private $date_debut;
-
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $date_fin;
-
-    /**
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $nb_episodes;
@@ -48,24 +40,45 @@ class Anime
     private $nom_romaji;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $studio;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_debut;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_fin;
+
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $realisateur;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\ManyToMany(targetEntity=Artiste::class, inversedBy="animes")
      */
-    private $scenariste;
+    private $artistes;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\ManyToMany(targetEntity=AnimeGenre::class, inversedBy="animes")
      */
-    private $genre;
+    private $genres;
 
     /**
-     * @ORM\Column(type="string", length=40, nullable=true)
+     * @ORM\Column(type="text")
      */
-    private $studio;
+    private $courte_description;
+
+    public function __construct()
+    {
+        $this->genres = new ArrayCollection();
+        $this->artistes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -96,29 +109,6 @@ class Anime
         return $this;
     }
 
-    public function getDateDebut(): ?int
-    {
-        return $this->date_debut;
-    }
-
-    public function setDateDebut(int $date_debut): self
-    {
-        $this->date_debut = $date_debut;
-
-        return $this;
-    }
-
-    public function getDateFin(): ?int
-    {
-        return $this->date_fin;
-    }
-
-    public function setDateFin(?int $date_fin): self
-    {
-        $this->date_fin = $date_fin;
-
-        return $this;
-    }
 
     public function getNbEpisodes(): ?int
     {
@@ -144,6 +134,43 @@ class Anime
         return $this;
     }
 
+    public function getStudio(): ?string
+    {
+        return $this->studio;
+    }
+
+    public function setStudio(?string $studio): self
+    {
+        $this->studio = $studio;
+
+        return $this;
+    }
+
+
+    public function getDateDebut(): ?\DateTimeInterface
+    {
+        return $this->date_debut;
+    }
+
+    public function setDateDebut(?\DateTimeInterface $date_debut): self
+    {
+        $this->date_debut = $date_debut;
+
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->date_fin;
+    }
+
+    public function setDateFin(?\DateTimeInterface $date_fin): self
+    {
+        $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
     public function getRealisateur(): ?string
     {
         return $this->realisateur;
@@ -156,38 +183,69 @@ class Anime
         return $this;
     }
 
-    public function getScenariste(): ?string
+    public function __toString()
     {
-        return $this->scenariste;
+        return $this->nom;
     }
 
-    public function setScenariste(?string $scenariste): self
+    /**
+     * @return Collection|Artiste[]
+     */
+    public function getArtistes(): Collection
     {
-        $this->scenariste = $scenariste;
+        return $this->artistes;
+    }
+
+    public function addArtiste(Artiste $artiste): self
+    {
+        if (!$this->artistes->contains($artiste)) {
+            $this->artistes[] = $artiste;
+        }
 
         return $this;
     }
 
-    public function getGenre(): ?string
+    public function removeArtiste(Artiste $artiste): self
     {
-        return $this->genre;
-    }
-
-    public function setGenre(string $genre): self
-    {
-        $this->genre = $genre;
+        if ($this->artistes->contains($artiste)) {
+            $this->artistes->removeElement($artiste);
+        }
 
         return $this;
     }
 
-    public function getStudio(): ?string
+    /**
+     * @return Collection|AnimeGenre[]
+     */
+    public function getGenres(): Collection
     {
-        return $this->studio;
+        return $this->genres;
     }
 
-    public function setStudio(?string $studio): self
+    public function addGenre(AnimeGenre $genre): self
     {
-        $this->studio = $studio;
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(AnimeGenre $genre): self
+    {
+        $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getCourteDescription(): ?string
+    {
+        return $this->courte_description;
+    }
+
+    public function setCourteDescription(string $courte_description): self
+    {
+        $this->courte_description = $courte_description;
 
         return $this;
     }

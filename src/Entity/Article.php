@@ -43,7 +43,7 @@ class Article
     private $dateDerniereModification;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=false)
      */
     private $statut;
 

@@ -4,6 +4,12 @@ easy_admin:
         # List the entity class name you want to manage
         Article:
           class : App\Entity\Article
+          form:
+            fields:
+              - 'artiste_id'
+              - {property: 'description', type: 'textarea'}
+              - 'banner_playlist'
+              - {property: 'statut', type: 'choice', type_options: {choices: {'En cours' : 'En cours', 'Publié' : 'Publié'}}}
         Album:
           class : App\Entity\Album
         Artiste:
@@ -12,10 +18,33 @@ easy_admin:
             fields:
               - 'nom'
               - 'nom_jp'
+              - 'nom_alternatif'
               - 'genre'
               - { property: 'date_de_naissance', type_options: {widget: 'single_text'}}
               - 'lieu_naissance'
               - 'date_debut'
               - 'date_fin'
+              - {property: 'courte_description', type: 'textarea'}
+              - 'groupes'
+              - 'animes'
+        Groupe:
+          class: App\Entity\Groupe
+        GroupeMembre:
+          class: App\Entity\GroupeMembre
+        Anime:
+          class : App\Entity\Anime
+          form:
+            fields:
+              - 'nom'
+              - 'nom_jp'
+              - 'nb_episodes'
+              - 'nom_romaji'
+              - 'realisateur'
+              - 'studio'
+              - 'genres'
+              - { property: 'date_debut', type_options: {widget: 'single_text'}}
+              - { property: 'date_fin', type_options: {widget: 'single_text'}}
+              - 'artistes'
               - 'courte_description'
-              - 'favori'
+        AnimeGenre:
+          class : App\Entity\AnimeGenre

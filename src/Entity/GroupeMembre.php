@@ -33,9 +33,24 @@ class GroupeMembre
     private $poste;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $nom_jp;
+    private $actif;
+
+    /**
+     * @ORM\Column(type="string", length=4, nullable=true)
+     */
+    private $debut;
+
+    /**
+     * @ORM\Column(type="string", length=4, nullable=true)
+     */
+    private $fin;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Artiste::class, cascade={"persist", "remove"})
+     */
+    private $artiste;
 
     public function getId(): ?int
     {
@@ -78,14 +93,50 @@ class GroupeMembre
         return $this;
     }
 
-    public function getNomJp(): ?string
+    public function getActif(): ?bool
     {
-        return $this->nom_jp;
+        return $this->actif;
     }
 
-    public function setNomJp(?string $nom_jp): self
+    public function setActif(bool $actif): self
     {
-        $this->nom_jp = $nom_jp;
+        $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getDebut(): ?string
+    {
+        return $this->debut;
+    }
+
+    public function setDebut(?string $debut): self
+    {
+        $this->debut = $debut;
+
+        return $this;
+    }
+
+    public function getFin(): ?string
+    {
+        return $this->fin;
+    }
+
+    public function setFin(?string $fin): self
+    {
+        $this->fin = $fin;
+
+        return $this;
+    }
+
+    public function getArtiste(): ?Artiste
+    {
+        return $this->artiste;
+    }
+
+    public function setArtiste(?Artiste $artiste): self
+    {
+        $this->artiste = $artiste;
 
         return $this;
     }
