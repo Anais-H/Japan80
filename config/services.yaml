@@ -5,6 +5,12 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     users_pp_dir: '%kernel.project_dir%/public/uploads/users_pp'
+    app.path.article_card: /uploads/article_card
+    app.path.article_image: /uploads/article_image
+    app.path.artiste_image: /uploads/artiste_image
+    app.path.anime_image: /uploads/anime_image
+    app.path.groupe_image: /uploads/groupe_image
+    app.path.album_image: /uploads/album_image
 
 services:
     # default configuration for services in *this* file

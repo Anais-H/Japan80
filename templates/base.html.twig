@@ -11,7 +11,9 @@
 		{{ encore_entry_link_tags('app') }}
 
 		<!-- Renders a link tag (if your module requires any CSS) -->
-		{% block stylesheet %}{% endblock %}
+		<style>
+			{% block stylesheet %}{% endblock %}
+		</style>
 		<!-- CSS -->
 
 		<!-- font -->
@@ -24,7 +26,7 @@
 		{% block meta %}
 			<meta name="title" content="City Pop Japan, L'univers du Japon des années 80">
 			<meta name="description" content="La description de votre site ! PRIMORDIAL : mettre de bons mots clés !">
-			<meta name="keyword" content="musique, citypop, city-pop, disco, japon, idols, funk, future funk, idoles, 80, années 80, 80's, 80s">
+			<meta name="keyword" content="musique, citypop, city-pop, japon, idols, funk, idoles, 80, années 80, 80's, 80s">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{% endblock %}
 		<!-- meta -->

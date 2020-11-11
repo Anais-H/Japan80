@@ -6,10 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlbumRepository")
  * @UniqueEntity("titre")
+ * @Vich\Uploadable
  */
 class Album
 {
@@ -32,11 +35,6 @@ class Album
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $couverture;
-
-    /**
      * @ORM\Column(type="string", length=100, unique=true)
      */
     private $titre;
@@ -47,14 +45,30 @@ class Album
     private $date_sortie;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $favori;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="albums_favoris")
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image")
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @var \DateTime $updatedAt
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -90,18 +104,6 @@ class Album
         return $this;
     }
 
-    public function getCouverture(): ?string
-    {
-        return $this->couverture;
-    }
-
-    public function setCouverture(?string $couverture): self
-    {
-        $this->couverture = $couverture;
-
-        return $this;
-    }
-
     public function getTitre(): ?string
     {
         return $this->titre;
@@ -131,17 +133,6 @@ class Album
         return $this->titre;
     }
 
-    public function getFavori(): ?bool
-    {
-        return $this->favori;
-    }
-
-    public function setFavori(?bool $favori): self
-    {
-        $this->favori = $favori;
-
-        return $this;
-    }
 
     /**
      * @return Collection|User[]
@@ -168,6 +159,43 @@ class Album
             $user->removeAlbumFavori($this);
         }
 
+        return $this;
+    }
+
+    public function setImageFile(File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }

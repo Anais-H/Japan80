@@ -534,20 +534,20 @@ button.is-icon:hover {
     color: $black;
 }
 
-figure#edit-profil-picture {
+div#edit-profil-picture {
     opacity: 0;
     position: absolute;
     transition: .6s ease;
     background-color: rgba(0, 0, 0, 0.281);
-    top: 50%;
-    left: 50%;
+    min-width: 8rem;
+    min-height: 8rem;
+    width: 8rem;
+    height: 8rem;
     text-align: center;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
 }
 
-figure#edit-profil-picture i {
+div#edit-profil-picture i {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -555,21 +555,23 @@ figure#edit-profil-picture i {
     -ms-transform: translate(-50%, -50%);
 }
 
-figure#js-profil-picture-form-link:hover figure#edit-profil-picture {
+div#js-profil-picture-form-field:hover div#edit-profil-picture {
     opacity: 1;
 }
 
-input#profil_picture_profilPictureFile {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    overflow: hidden;
-    width: 3rem;
-    height: 5rem;
+form.js-profile-form-object {
+    height: 8rem;
+    min-height: 8rem;
     opacity: 0;
+
+}
+
+input#profil_picture_profilPictureFile {
+    overflow: hidden;
+    width: 8rem;
+    height: 8rem;
     cursor: pointer;
+    border-radius: 50%;
 }
 
 input#profil_picture_profilPictureFile + label {

@@ -11,7 +11,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Article|null findOneBy(array $criteria, array $orderBy = null)
  * @method Article[]    findAll()
  * @method Article[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @method Article|null findOneByArtisteId($value)
  */
 class ArticleRepository extends ServiceEntityRepository
 {
@@ -38,10 +37,10 @@ class ArticleRepository extends ServiceEntityRepository
     */
 
 
-    public function findOneByArtisteId($value): ?Article
+    public function findOneByArtiste($value): ?Article
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.artiste_id = :val')
+            ->andWhere('a.artiste = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult();

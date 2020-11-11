@@ -338,11 +338,11 @@ function onChangeSubmitProfileForm(event) {
     formData = new FormData($profileForm);
 
     axios.post($profileForm.action, formData).then(function (response) {
-        $profileImg = document.querySelector('img#js-profile-img');
+        $profileImg = document.querySelector('div#js-profile-img');
 
         if ($profileImg) {
             console.log('image changed');
-            $profileImg.src = "uploads/users_pp/" + response.data.newPicture;
+            $profileImg.style.backgroundImage = "uploads/users_pp/" + response.data.newPicture;
         } else {
             console.log('no image');
         }

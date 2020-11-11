@@ -1,0 +1,22 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        article_card:
+            uri_prefix: '%app.path.article_card%'
+            upload_destination: '%kernel.project_dir%/public%app.path.article_card%'
+        article_image:
+            uri_prefix: '%app.path.article_image%'
+            upload_destination: '%kernel.project_dir%/public%app.path.article_image%'
+        artiste_image:
+            uri_prefix: '%app.path.artiste_image%'
+            upload_destination: '%kernel.project_dir%/public%app.path.artiste_image%'
+        anime_image:
+            uri_prefix: '%app.path.anime_image%'
+            upload_destination: '%kernel.project_dir%/public%app.path.anime_image%'
+        groupe_image:
+            uri_prefix: '%app.path.groupe_image%'
+            upload_destination: '%kernel.project_dir%/public%app.path.groupe_image%'
+        album_image:
+            uri_prefix: '%app.path.album_image%'
+            upload_destination: '%kernel.project_dir%/public%app.path.album_image%'

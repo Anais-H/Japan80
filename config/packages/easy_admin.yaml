@@ -6,19 +6,44 @@ easy_admin:
           class : App\Entity\Article
           form:
             fields:
-              - 'artiste_id'
-              - {property: 'description', type: 'textarea'}
-              - 'banner_playlist'
+              - {property: 'artiste', type_options: { disabled: true }}
               - {property: 'statut', type: 'choice', type_options: {choices: {'En cours' : 'En cours', 'Publié' : 'Publié'}}}
+              - {property: 'description', type: 'textarea'}
+              - { property: 'cardFile', type: 'vich_image'}
+              - { property: 'imageFile', type: 'vich_image'}
+              - 'banner_playlist'
+          list:
+            fields:
+              - 'artiste'
+              - 'statut'
+              - 'dateDerniereModification'
         Album:
           class : App\Entity\Album
+          list:
+            fields:
+              - 'titre'
+              - 'artiste'
+              - 'type'
+              - 'date_sortie'
+          form:
+            fields:
+              - 'titre'
+              - 'artiste'
+              - 'type'
+              - 'date_sortie'
+              - { property: 'imageFile', type: 'vich_image'}
         Artiste:
           class : App\Entity\Artiste
+          list:
+            fields:
+              - 'nom'
+              - 'nom_jp'
           form:
             fields:
               - 'nom'
               - 'nom_jp'
               - 'nom_alternatif'
+              - { property: 'imageFile', type: 'vich_image'}
               - 'genre'
               - { property: 'date_de_naissance', type_options: {widget: 'single_text'}}
               - 'lieu_naissance'
@@ -29,6 +54,18 @@ easy_admin:
               - 'animes'
         Groupe:
           class: App\Entity\Groupe
+          list:
+            fields:
+              - 'nom'
+              - 'nom_jp'
+          form:
+            fields:
+              - 'nom'
+              - 'nom_jp'
+              - 'date_debut'
+              - 'date_fin'
+              - 'artistes'
+              - { property: 'imageFile', type: 'vich_image'}
         GroupeMembre:
           class: App\Entity\GroupeMembre
         Anime:
@@ -46,5 +83,6 @@ easy_admin:
               - { property: 'date_fin', type_options: {widget: 'single_text'}}
               - 'artistes'
               - 'courte_description'
+              - { property: 'imageFile', type: 'vich_image'}
         AnimeGenre:
           class : App\Entity\AnimeGenre

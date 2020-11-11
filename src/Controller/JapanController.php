@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Artiste;
 use App\Entity\Article;
 use App\Entity\Album;
+use App\Entity\Anime;
+use App\Entity\Groupe;
 use App\Entity\ArtisteLike;
 use App\Entity\User;
 use App\Repository\ArtisteLikeRepository;
@@ -69,10 +71,14 @@ class JapanController extends AbstractController
     public function indexArtistes()
     {
         $artisteRepository = $this->getDoctrine()->getRepository(Artiste::class);
+        $groupeRepository = $this->getDoctrine()->getRepository(Groupe::class);
+        $animeRepository = $this->getDoctrine()->getRepository(Anime::class);
 
         $lesArtistes = $artisteRepository->findBy(array(), array('nom' => 'ASC'));
+        $lesGroupes = $groupeRepository->findBy(array(), array('nom' => 'ASC'));
+        $lesAnimes = $animeRepository->findBy(array(), array('nom' => 'ASC'));
 
-        return $this->render('artistes/artistes.html.twig', ['artistes' => $lesArtistes]);
+        return $this->render('artistes/artistes.html.twig', ['artistes' => $lesArtistes, 'groupes' => $lesGroupes, 'animes' => $lesAnimes]);
     }
 
     /**
@@ -80,15 +86,19 @@ class JapanController extends AbstractController
      */
     public function quiSuisje()
     {
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $me = $userRepository->findOneBy(array('pseudo' => 'Hai-Lyn'));
 
-        $albumRepository = $this->getDoctrine()->getRepository(Album::class);
-        $artisteRepository = $this->getDoctrine()->getRepository(Artiste::class);
+        $artistesLikes = $me->getArtisteLikes(); // Retourne des objets de artisteLikes
 
-        $lesAlbums = $albumRepository->findBy(array('favori' => 'true'), array('titre' => 'ASC'));
-        $lesArtistes = $artisteRepository->findBy(array('favori' => 'true'), array('nom' => 'ASC'));
+        $artistesFavoris = []; // on crée le tableau des artistes likes et on le remplit
+        foreach ($artistesLikes as $artisteLike) {
+            $artistesFavoris[] = $artisteLike->getArtiste();
+        }
 
+        $albumsFavoris = [];
 
-        return $this->render('aPropos/quiSuisJe.html.twig', ['albumsFavoris' => $lesAlbums, 'artistesFavoris' => $lesArtistes]);
+        return $this->render('aPropos/quiSuisJe.html.twig', ['moi' => $me, 'albumsFavoris' => $albumsFavoris, 'artistesFavoris' => $artistesFavoris]);
     }
 
 
@@ -103,7 +113,7 @@ class JapanController extends AbstractController
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
         $albumRepository = $this->getDoctrine()->getRepository(Album::class);
 
-        $article = $articleRepository->findOneByArtisteId($artiste->getId());
+        $article = $articleRepository->findOneByArtiste($artiste);
 
         if ($article == null) {
             throw $this->createNotFoundException('L\'article est introuvable...');

@@ -12,7 +12,16 @@
     {# mon intro #}
     <div id="mon-intro">
 
-        <h2 class="subtitle heading-site">Qui suis-je ?</h2>
+        <div class="container" style="margin-bottom: 2rem;">
+            <div class="columns is-mobile is-centered is-vcentered">
+                <div class="column is-narrow">
+                    <div style="border-radius: 50%; background-size: cover; background-position: center; background-image: url({{ asset('uploads/users_pp/' ~ moi.profilPicture) }}); min-width: 8rem; min-height: 8rem; width: 8rem; height: 8rem;"></div>
+                </div>
+                <div class="column is-narrow">
+                    <h1 class="title heading-site">{{ moi.pseudo }}</h1>
+                </div>
+            </div>
+        </div>
 
         <div class="card">
             <div class="card-content">
@@ -20,27 +29,13 @@
 
                 <div class="has-text-justified" id="intoQuotes">
                     <p>Bonjour à tous !</p>
-                    <p>
-                        Voilà un petit résumé sur moi et ce site web. J'essaye d'agrandir ma collection de vinyls. Lorem
-                        ipsum dolor sit amet, consectetur adipiscing elit. Vivamus risus ante, tincidunt eu neque in,
-                        vulputate iaculis metus.
-                        Proin vel malesuada felis. In a metus vitae ante dignissim suscipit non id tellus. Maecenas
-                        commodo neque nec tellus vestibulum, sed porta nibh eleifend.
-                        Ut venenatis nunc nec nibh vulputate, id sollicitudin lectus blandit. Vestibulum at libero eu
-                        eros mollis finibus. Nulla augue sapien, dignissim non enim sed, lacinia iaculis lorem.
-                        Vivamus luctus, ligula ut sodales egestas, urna velit egestas ex, et rutrum ex purus molestie
-                        felis. Mauris tincidunt finibus fermentum. Sed non iaculis leo.
-                        Maecenas varius leo interdum, ornare turpis eu, laoreet turpis. Cras elementum tellus nec dui
-                        laoreet convallis. Quisque ac condimentum sem. Morbi lacinia libero euismod odio vulputate
-                        viverra.
-                        Maecenas tempor vestibulum sapien, ac consectetur justo varius eget.
-                    </p>
+                    <p>{{ moi.description }}</p>
                     <p>J'espère que vous passerez un bon moment ici !</p>
                 </div>
                 <p class="has-text-right"><i class="fas fa-quote-right fa-2x"></i></p>
 
                 <p class="subtitle has-text-centered is-italic">
-                    Anaïs
+                    {{ moi.pseudo }}
                 </p>
             </div>
         </div>
@@ -59,7 +54,7 @@
                 <div class="column is-half-desktop is-two-fifths has-text-white">
                     <figure class="image is-16by9">
                         <iframe class="has-ratio has-shadow" width="640" height="360"
-                            src="https://www.youtube.com/embed/videoseries?list=PLFqnJsmyHfyd2PetrlXxgLwDNaUdB85Lv"
+                                src="{{ moi.playlistLink }}"
                             frameborder="0" allowfullscreen></iframe>
                     </figure>
                 </div>
