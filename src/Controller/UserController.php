@@ -23,15 +23,23 @@ class UserController extends AbstractController
     public function index(User $user)
     {
         $artistesLikes = $user->getArtisteLikes(); // Retourne des objets de artisteLikes
+        $animesLikes = $user->getAnimeLikes();
 
         $artistesFavoris = []; // on crée le tableau des artistes likes et on le remplit
         foreach ($artistesLikes as $artisteLike) {
             $artistesFavoris[] = $artisteLike->getArtiste();
         }
 
+        $animesFavoris = [];
+
+        $animesFavoris = []; // on crée le tableau des artistes likes et on le remplit
+        foreach ($animesLikes as $animeLike) {
+            $animesFavoris[] = $animeLike->getAnime();
+        }
+
         $albumsFavoris = [];
 
-        return $this->render('user/index.html.twig', ['user' => $user, 'artistesFavoris' => $artistesFavoris, 'albumsFavoris' => $albumsFavoris]);
+        return $this->render('user/index.html.twig', ['user' => $user, 'artistesFavoris' => $artistesFavoris, 'animesFavoris' => $animesFavoris, 'albumsFavoris' => $albumsFavoris]);
     }
 
     /**

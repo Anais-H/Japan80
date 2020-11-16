@@ -29,8 +29,13 @@ div#histoireLocaleNav {
     transition-duration: 1s;
 }
 
-div#histoireLocaleNav i:hover {
+div#histoireLocaleNav span:hover {
     color: $link;
+    cursor: pointer;
+}
+
+span#closeNavMenuRaccourcis {
+    cursor: pointer;
 }
 
 div#histoireLocaleNav.is-active {
@@ -51,8 +56,9 @@ div#navMenuRaccourcis {
     color: white;
 }
 
-div#navMenuRaccourcis i:hover {
+div#navMenuRaccourcis span:hover {
     color: $link;
+    cursor: pointer;
 }
 
 div#navMenuRaccourcis div.entree {

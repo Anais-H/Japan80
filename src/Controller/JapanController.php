@@ -7,7 +7,7 @@ use App\Entity\Article;
 use App\Entity\Album;
 use App\Entity\Anime;
 use App\Entity\Groupe;
-use App\Entity\ArtisteLike;
+use App\Entity\AnimeArticle;
 use App\Entity\User;
 use App\Repository\ArtisteLikeRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +33,7 @@ class JapanController extends AbstractController
     public function accueil()
     {
         $artisteRepository = $this->getDoctrine()->getRepository(Artiste::class);
+        $animeRepository = $this->getDoctrine()->getRepository(Anime::class);
 
         $artiste1 = $artisteRepository->findOneByNom('Mariya Takeuchi');
 
@@ -48,11 +49,11 @@ class JapanController extends AbstractController
 
         $favori2 = ['legende' => "I RE'IN FOR RE'IN - Mystery Girl", 'lien' => "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/241916642&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"];
 
-        //$anime = ;
+        $anime = $animeRepository->getMaxResults(1);
 
         return $this->render('accueil.html.twig', [
             'artiste1' => $artiste1, 'artiste2' => $artiste2, 'favori1' => $favori1, 'favori2' => $favori2,
-            'artiste3' => $artiste3, 'artiste4' => $artiste4, 'artiste5' => $artiste5
+            'artiste3' => $artiste3, 'artiste4' => $artiste4, 'artiste5' => $artiste5, 'anime' => $anime
         ]);
     }
 
@@ -124,5 +125,22 @@ class JapanController extends AbstractController
         $dateDeNaissance = $artiste->getDateDeNaissance()->format('d/m/Y');
 
         return $this->render('artistes/artiste.html.twig', ['artiste' => $artiste, 'article' => $article, 'dateDeNaissance' => $dateDeNaissance, 'albums' => $albums, 'singles' => $singles]);
+    }
+
+
+    /**
+     * @Route("/animes/{nom}", name="anime_show")
+     */
+    public function showAnime(Anime $anime)
+    {
+        $animeArticleRepository = $this->getDoctrine()->getRepository(AnimeArticle::class);
+
+        $article = $animeArticleRepository->findOneByAnime($anime);
+
+        if ($anime == null) {
+            throw $this->createNotFoundException('L\'article est introuvable...');
+        }
+
+        return $this->render('animes/anime.html.twig', ['anime' => $anime, 'article' => $article]);
     }
 }

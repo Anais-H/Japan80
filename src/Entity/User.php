@@ -78,10 +78,16 @@ class User implements UserInterface
      */
     private $profilPicture;
 
+    /**
+     * @ORM\OneToMany(targetEntity=AnimeLike::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $animeLikes;
+
     public function __construct()
     {
         $this->albums_favoris = new ArrayCollection();
         $this->artisteLikes = new ArrayCollection();
+        $this->animeLikes = new ArrayCollection();
     }
 
 
@@ -298,5 +304,35 @@ class User implements UserInterface
     public function __toString(): string
     {
         return $this->pseudo;
+    }
+
+    /**
+     * @return Collection|AnimeLike[]
+     */
+    public function getAnimeLikes(): Collection
+    {
+        return $this->animeLikes;
+    }
+
+    public function addAnimeLike(AnimeLike $animeLike): self
+    {
+        if (!$this->animeLikes->contains($animeLike)) {
+            $this->animeLikes[] = $animeLike;
+            $animeLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimeLike(AnimeLike $animeLike): self
+    {
+        if ($this->animeLikes->removeElement($animeLike)) {
+            // set the owning side to null (unless already changed)
+            if ($animeLike->getUser() === $this) {
+                $animeLike->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

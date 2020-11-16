@@ -8,17 +8,15 @@
 
 		<!-- CSS -->
 		{# 'app' must match the first argument to addEntry() in webpack.config.js #}
-		{{ encore_entry_link_tags('app') }}
+
 
 		<!-- Renders a link tag (if your module requires any CSS) -->
-		<style>
-			{% block stylesheet %}{% endblock %}
-		</style>
+		{{ encore_entry_link_tags('app') }}{% block stylesheet %}
+		{% endblock %}
 		<!-- CSS -->
 
 		<!-- font -->
-		<link href="https://fonts.googleapis.com/css?family=Carter+One|Mada:500&display=swap" rel="stylesheet">
-		<script src="https://kit.fontawesome.com/8f681046b0.js" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Carter+One|Mada:500&display=swap" rel="stylesheet"> <script src="https://kit.fontawesome.com/8f681046b0.js" crossorigin="anonymous"></script>
 
 		<!-- font -->
 

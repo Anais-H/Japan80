@@ -17,6 +17,15 @@ easy_admin:
               - 'artiste'
               - 'statut'
               - 'dateDerniereModification'
+        AnimeArticle:
+          class: App\Entity\AnimeArticle
+          form:
+            fields:
+              - 'anime'
+              - {property: 'statut', type: 'choice', type_options: {choices: {'En cours' : 'En cours', 'Publié' : 'Publié'}}}
+              - {property: 'description', type: 'textarea'}
+              - {property: 'image1File', type: 'vich_image'}
+              - 'playlist'
         Album:
           class : App\Entity\Album
           list:

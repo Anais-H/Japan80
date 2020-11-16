@@ -29,7 +29,7 @@
 								<table>
 									<tr>
 										<td>
-											<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste1.nom) }}" alt="{{ artiste1.nom }}"></figure>
+											<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ vich_uploader_asset(artiste1, 'imageFile') }}" alt="{{ artiste1.nom }}"></figure>
 										</td>
 										<td class="text-cell">
 											<p>{{artiste1.courteDescription}}</p>
@@ -45,7 +45,7 @@
 								<table>
 									<tr>
 										<td>
-											<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste2.nom) }}" alt="{{ artiste2.nom }}"></figure>
+											<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ vich_uploader_asset(artiste2, 'imageFile') }}" alt="{{ artiste2.nom }}"></figure>
 										</td>
 										<td class="text-cell">
 											<p>{{artiste2.courteDescription}}</p>
@@ -81,12 +81,12 @@
 
 						<article class="tile is-child box">
 							<h3 class="title is-3">
-								<a href="#">City Hunter</a>
+								<a href="{{ path('anime_show', {nom: anime.nom}) }}">{{ anime.nom }}</a>
 							</h3>
 							<table>
 								<tr>
 									<td>
-										<figure class="image"><img class="image-rounded-corners" src="{{ asset('build/city-hunter-massue') }}" alt="image de l'anime City Hunter où Kaori donne un coup de massue à Ryo"></figure>
+										<figure class="image"><img class="image-rounded-corners" src="{{ vich_uploader_asset(anime, 'imageFile') }}" alt="image de l'anime {{ anime.nom }}"></figure>
 									</td>
 									<td class="text-cell">
 										<p>Connu en France sous le nom de
@@ -112,7 +112,7 @@
 						<table>
 							<tr>
 								<td>
-									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste3.nom) }}" alt="{{ artiste3.nom }}"></figure>
+									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ vich_uploader_asset(artiste3, 'imageFile') }}" alt="{{ artiste3.nom }}"></figure>
 								</td>
 								<td class="text-cell">
 									<p>{{artiste3.courteDescription}}</p>
@@ -128,7 +128,7 @@
 						<table>
 							<tr>
 								<td>
-									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste4.nom) }}" alt="{{ artiste4.nom }}"></figure>
+									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ vich_uploader_asset(artiste4, 'imageFile') }}" alt="{{ artiste4.nom }}"></figure>
 								</td>
 								<td class="text-cell">
 									<p>{{artiste4.courteDescription}}</p>
@@ -144,7 +144,7 @@
 						<table>
 							<tr>
 								<td>
-									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ asset('build/' ~ artiste5.nom) }}" alt="{{ artiste5.nom }}"></figure>
+									<figure class="image is-128x128"><img class="is-rounded on-the-left" src="{{ vich_uploader_asset(artiste5, 'imageFile') }}" alt="{{ artiste5.nom }}"></figure>
 								</td>
 								<td class="text-cell">
 									<p>{{artiste5.courteDescription}}</p>

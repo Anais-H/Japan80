@@ -11,6 +11,7 @@ parameters:
     app.path.anime_image: /uploads/anime_image
     app.path.groupe_image: /uploads/groupe_image
     app.path.album_image: /uploads/album_image
+    app.path.anime_article_image1: /uploads/anime_article_image1
 
 services:
     # default configuration for services in *this* file

@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Anime;
+use App\Entity\AnimeLike;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Anime|null find($id, $lockMode = null, $lockVersion = null)
- * @method Anime|null findOneBy(array $criteria, array $orderBy = null)
- * @method Anime[]    findAll()
- * @method Anime[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method AnimeLike|null find($id, $lockMode = null, $lockVersion = null)
+ * @method AnimeLike|null findOneBy(array $criteria, array $orderBy = null)
+ * @method AnimeLike[]    findAll()
+ * @method AnimeLike[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AnimeRepository extends ServiceEntityRepository
+class AnimeLikeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Anime::class);
+        parent::__construct($registry, AnimeLike::class);
     }
 
     // /**
-    //  * @return Anime[] Returns an array of Anime objects
+    //  * @return AnimeLike[] Returns an array of AnimeLike objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class AnimeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Anime
+    public function findOneBySomeField($value): ?AnimeLike
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')
@@ -47,12 +47,4 @@ class AnimeRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    public function getMaxResults($value): ?Anime
-    {
-        return $this->createQueryBuilder('a')
-            ->setMaxResults($value)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 }

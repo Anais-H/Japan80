@@ -97,8 +97,21 @@ class Anime
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity=AnimeArticle::class, mappedBy="anime", cascade={"persist", "remove"})
+     */
+    private $article;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AnimeLike", mappedBy="anime")
+     */
+    private $likes;
+
+
     public function __construct()
     {
+        $this->users = new ArrayCollection();
+        $this->likes = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->artistes = new ArrayCollection();
     }
@@ -308,5 +321,69 @@ class Anime
     {
         $this->updatedAt = $updatedAt;
         return $this;
+    }
+
+    public function getArticle(): ?AnimeArticle
+    {
+        return $this->article;
+    }
+
+    public function setArticle(AnimeArticle $article): self
+    {
+        $this->article = $article;
+
+        // set the owning side of the relation if necessary
+        if ($article->getAnime() !== $this) {
+            $article->setAnime($this);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|AnimeLike[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(AnimeLike $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setAnime($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(AnimeLike $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getAnime() === $this) {
+                $like->setAnime(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Permet de savoir si cet article est like par un utilisateur.
+     * 
+     */
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->likes as $like) {
+            if ($like->getUser() === $user) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

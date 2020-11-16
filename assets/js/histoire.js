@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     });
 
-    $("i#closeNavMenuRaccourcis").click(function () {
+    $("span#closeNavMenuRaccourcis").click(function () {
 
         $("div#histoireLocaleNav").toggleClass("is-active");
         $("div#navMenuRaccourcis").toggleClass("is-active");
